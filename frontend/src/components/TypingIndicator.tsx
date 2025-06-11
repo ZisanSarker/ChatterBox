@@ -1,24 +1,84 @@
+import { colors } from '../constants/colors';
+import { styles, createGlassEffect } from '../constants/styles';
+import { animations } from '../constants/animations';
+import type { TypingUser } from '../types';
+
 interface Props {
-  typingUsers: { username: string; isTyping: boolean }[]
+  typingUsers: TypingUser[];
 }
 
 export default function TypingIndicator({ typingUsers }: Props) {
-  const activeTypers = typingUsers.filter(user => user.isTyping)
+  const activeTypers = typingUsers.filter(user => user.isTyping);
   
-  if (activeTypers.length === 0) return null
+  if (activeTypers.length === 0) return null;
 
   const typingText = activeTypers.length === 1 
     ? `${activeTypers[0].username} is typing...`
-    : `${activeTypers.map(u => u.username).join(', ')} are typing...`
+    : `${activeTypers.map(u => u.username).join(', ')} are typing...`;
 
   return (
-    <div className="flex items-center space-x-2 p-2 text-sm text-gray-500">
-      <div className="flex space-x-1">
-        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+    <>
+      <style>
+        {`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes typingBounce {
+            ${Object.entries(animations.keyframes.typingBounce)
+              .map(([key, value]) => `${key} { ${Object.entries(value)
+                .map(([prop, val]) => `${prop}: ${val}`)
+                .join('; ')} }`)
+              .join('\n')}
+          }
+        `}
+      </style>
+      <div
+        style={{
+          ...createGlassEffect(0.1, 12),
+          borderRadius: styles.borderRadius.lg,
+          padding: `${styles.spacing.md} ${styles.spacing.lg}`,
+          margin: `${styles.spacing.sm} ${styles.spacing.md}`,
+          display: 'flex',
+          alignItems: 'center',
+          gap: styles.spacing.md,
+          animation: `fadeInUp ${animations.duration.normal} ${animations.timing.easeOut}`,
+          boxShadow: styles.shadows.small,
+        }}
+      >
+        <div style={{ display: 'flex', gap: '3px', alignItems: 'center' }}>
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: colors.gradients.primary,
+                animation: `typingBounce 1.4s infinite ease-in-out`,
+                animationDelay: `${i * 0.2}s`,
+              }}
+            />
+          ))}
+        </div>
+        <span
+          style={{
+            fontSize: styles.typography.fontSizes.sm,
+            color: colors.text.secondary,
+            fontWeight: styles.typography.fontWeights.medium,
+            fontStyle: 'italic',
+          }}
+        >
+          {typingText}
+        </span>
       </div>
-      <span>{typingText}</span>
-    </div>
-  )
+    </>
+  );
 }

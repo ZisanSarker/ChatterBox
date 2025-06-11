@@ -1,54 +1,99 @@
-import React, { useState } from 'react'
-import ChatPage from './pages/ChatPage'
+import React, { useState } from 'react';
+import ChatPage from './pages/ChatPage';
+import { styles, createGlassEffect } from './constants/styles';
+import { colors } from './constants/colors';
+import { animations } from './constants/animations';
 
 function App() {
-  const [username, setUsername] = useState<string>('')
-  const [inputValue, setInputValue] = useState<string>('')
+  const [username, setUsername] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
 
   const handleJoinChat = () => {
     if (inputValue.trim()) {
-      setUsername(inputValue.trim())
+      setUsername(inputValue.trim());
     }
-  }
+  };
 
   if (!username) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="p-8 bg-white rounded-lg shadow-lg max-w-md w-full mx-4">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '100vh',
+          background: colors.gradients.background,
+          padding: styles.spacing.md,
+        }}
+      >
+        <div
+          style={{
+            ...createGlassEffect(0.15, 20),
+            padding: styles.spacing.xl,
+            borderRadius: styles.borderRadius.xl,
+            maxWidth: '400px',
+            width: '100%',
+            boxShadow: styles.shadows.large,
+            animation: `${animations.keyframes.fadeIn} ${animations.duration.normal} ${animations.timing.easeOut}`,
+          }}
+        >
+          <h1
+            style={{
+              fontSize: styles.typography.fontSizes.xl,
+              fontWeight: styles.typography.fontWeights.bold,
+              color: colors.text.primary,
+              marginBottom: styles.spacing.xl,
+              textAlign: 'center',
+            }}
+          >
             Welcome to ChatterBox
           </h1>
-          <div className="space-y-4">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: styles.spacing.lg }}>
             <input
               type="text"
               placeholder="Enter your username"
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  handleJoinChat()
+                  handleJoinChat();
                 }
               }}
               maxLength={20}
+              style={{
+                ...styles.components.input.primary,
+                width: '100%',
+              }}
             />
             <button
               onClick={handleJoinChat}
               disabled={!inputValue.trim()}
-              className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium transition-colors"
+              style={{
+                ...styles.components.button.primary,
+                width: '100%',
+                opacity: inputValue.trim() ? 1 : 0.5,
+                cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
+              }}
             >
               Join Chat
             </button>
           </div>
-          <p className="text-sm text-gray-500 mt-4 text-center">
+          <p
+            style={{
+              fontSize: styles.typography.fontSizes.sm,
+              color: colors.text.secondary,
+              marginTop: styles.spacing.lg,
+              textAlign: 'center',
+            }}
+          >
             Choose a username to start chatting
           </p>
         </div>
       </div>
-    )
+    );
   }
 
-  return <ChatPage username={username} />
+  return <ChatPage username={username} />;
 }
 
-export default App
+export default App;
