@@ -24,8 +24,8 @@ Beautiful glassmorphism UI, responsive for all screens, and robust event-driven 
 
 ## 📸 Screenshots
 
-![ChatterBox Desktop](./Screenshot1.png)
-![ChatterBox Mobile](./Screenshot2.png)
+![ChatterBox Desktop](./Screenshots/Screenshot1.png)
+![ChatterBox Mobile](./Screenshots/Screenshot2.png)
 
 ---
 
