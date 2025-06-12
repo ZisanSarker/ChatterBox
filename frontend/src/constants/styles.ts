@@ -1,121 +1,36 @@
 import { colors } from './colors';
 import { animations } from './animations';
 
-export interface StylesType {
-  glass: {
-    primary: React.CSSProperties;
-    secondary: React.CSSProperties;
-    subtle: React.CSSProperties;
-  };
+export const styles = {
   shadows: {
-    small: string;
-    medium: string;
-    large: string;
-    inset: string;
-    glow: string;
-  };
-  borderRadius: {
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xxl: string;
-    full: string;
-  };
-  spacing: {
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    xxl: string;
-    xxxl: string;
-  };
-  typography: {
-    fontSizes: {
-      xs: string;
-      sm: string;
-      base: string;
-      lg: string;
-      xl: string;
-    };
-    fontWeights: {
-      normal: string;
-      medium: string;
-      semibold: string;
-      bold: string;
-    };
-    lineHeights: {
-      tight: string;
-      normal: string;
-      relaxed: string;
-    };
-  };
-  components: {
-    button: {
-      primary: React.CSSProperties;
-      secondary: React.CSSProperties;
-    };
-    input: {
-      primary: React.CSSProperties;
-    };
-  };
-}
-
-const styles: StylesType = {
-  glass: {
-    primary: {
-      background: colors.glass.primary,
-      backdropFilter: 'blur(20px) saturate(180%)',
-      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-      border: `1px solid ${colors.interactive.border}`,
-      borderRadius: '16px',
-    },
-    secondary: {
-      background: colors.glass.secondary,
-      backdropFilter: 'blur(12px) saturate(160%)',
-      WebkitBackdropFilter: 'blur(12px) saturate(160%)',
-      border: `1px solid ${colors.interactive.border}`,
-      borderRadius: '12px',
-    },
-    subtle: {
-      background: colors.glass.tertiary,
-      backdropFilter: 'blur(8px) saturate(140%)',
-      WebkitBackdropFilter: 'blur(8px) saturate(140%)',
-      borderRadius: '8px',
-    },
-  },
-  shadows: {
-    small: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
-    medium: '0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12)',
-    large: '0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10)',
-    inset: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
-    glow: '0 0 20px rgba(99, 102, 241, 0.3)',
+    small: '0 2px 6px rgba(0,0,0,0.09)',
+    medium: '0 4px 18px rgba(0,0,0,0.15)',
+    large: '0 8px 36px rgba(0,0,0,0.18)',
   },
   borderRadius: {
     sm: '6px',
-    md: '8px',
-    lg: '12px',
-    xl: '16px',
-    xxl: '20px',
+    md: '10px',
+    lg: '14px',
+    xl: '20px',
+    xxl: '30px',
     full: '9999px',
   },
   spacing: {
     xs: '4px',
     sm: '8px',
-    md: '12px',
-    lg: '16px',
-    xl: '20px',
-    xxl: '24px',
-    xxxl: '32px',
+    md: '14px',
+    lg: '20px',
+    xl: '30px',
+    xxl: '40px',
+    xxxl: '52px',
   },
   typography: {
     fontSizes: {
       xs: '0.75rem',
-      sm: '0.875rem',
-      base: '1rem',
-      lg: '1.125rem',
-      xl: '1.25rem',
+      sm: '0.9rem',
+      base: '1.04rem',
+      lg: '1.22rem',
+      xl: '1.4rem',
     },
     fontWeights: {
       normal: '400',
@@ -124,59 +39,55 @@ const styles: StylesType = {
       bold: '700',
     },
     lineHeights: {
-      tight: '1.25',
+      tight: '1.22',
       normal: '1.5',
-      relaxed: '1.75',
+      relaxed: '1.7',
     },
   },
   components: {
     button: {
       primary: {
-        background: colors.gradients.primary,
+        background: colors.gradients.accent,
         color: colors.text.light,
         border: 'none',
-        borderRadius: '8px',
-        padding: '10px 20px',
-        fontWeight: '500',
+        borderRadius: '10px',
+        padding: '12px 0',
+        fontWeight: '600',
         cursor: 'pointer',
+        fontSize: '1.05rem',
         transition: `all ${animations.duration.normal} ${animations.timing.easeInOut}`,
-        boxShadow: '0 3px 6px rgba(0, 0, 0, 0.15)',
+        boxShadow: '0 2px 8px rgba(99, 102, 241, 0.12)',
       },
       secondary: {
-        background: colors.interactive.secondary,
+        background: colors.gradients.glassLight,
         color: colors.text.primary,
         border: `1px solid ${colors.interactive.border}`,
         borderRadius: '8px',
-        padding: '10px 20px',
+        padding: '12px 32px',
         fontWeight: '500',
         cursor: 'pointer',
         transition: `all ${animations.duration.normal} ${animations.timing.easeInOut}`,
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
       },
     },
     input: {
       primary: {
-        background: colors.glass.secondary,
-        backdropFilter: 'blur(12px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(12px) saturate(160%)',
+        background: colors.gradients.glassLight,
         border: `1px solid ${colors.interactive.border}`,
         borderRadius: '8px',
         padding: '12px 16px',
         color: colors.text.primary,
-        fontSize: '14px',
+        fontSize: '1rem',
+        fontWeight: 500,
         transition: `all ${animations.duration.normal} ${animations.timing.easeInOut}`,
         outline: 'none',
+        boxShadow: 'none',
       },
     },
   },
 };
 
-export { styles };
-
-// Helper function to create glass effect styles
-export const createGlassEffect = (opacity = 0.15, blur = 20): React.CSSProperties => ({
-  background: `rgba(255, 255, 255, ${opacity})`,
+export const createGlassEffect = (opacity = 0.14, blur = 22): React.CSSProperties => ({
+  background: `rgba(30,30,36,${opacity})`,
   backdropFilter: `blur(${blur}px) saturate(180%)`,
   WebkitBackdropFilter: `blur(${blur}px) saturate(180%)`,
   border: `1px solid ${colors.interactive.border}`,

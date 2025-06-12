@@ -21,6 +21,15 @@ export const setupChatSocket = (io: Server) => {
       onlineUsers[socket.id] = username.trim();
       io.emit('users', Object.values(onlineUsers));
       console.log(`${username} joined the chat. Online users: ${Object.keys(onlineUsers).length}`);
+
+      // Emit system message for join
+      io.emit('message', {
+        id: 'system-' + Date.now() + '-' + Math.random(),
+        username: 'System',
+        text: `${username} joined the chat`,
+        createdAt: new Date().toISOString(),
+        type: 'system',
+      });
     });
 
     socket.on('sendMessage', (text: string) => {
@@ -64,6 +73,17 @@ export const setupChatSocket = (io: Server) => {
       
       const remainingUsers = Object.values(onlineUsers);
       io.emit('users', remainingUsers);
+
+      // Emit system message for leave
+      if (username) {
+        io.emit('message', {
+          id: 'system-' + Date.now() + '-' + Math.random(),
+          username: 'System',
+          text: `${username} left the chat`,
+          createdAt: new Date().toISOString(),
+          type: 'system',
+        });
+      }
       
       // Clear messages when all users leave
       if (remainingUsers.length === 0) {
