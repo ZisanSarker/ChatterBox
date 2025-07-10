@@ -3,7 +3,7 @@ import { SocketContext } from '../../context/SocketContext';
 import { styles, createGlassEffect } from '../../constants/styles';
 import { colors } from '../../constants/colors';
 
-const ChatBox: React.FC<{ username: string }> = ({ username }) => {
+const ChatBox: React.FC<{ username: string }> = () => {
   const [text, setText] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const socket = useContext(SocketContext);

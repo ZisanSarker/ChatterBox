@@ -1,4 +1,3 @@
-import React from 'react';
 import { styles, createGlassEffect } from '../../constants/styles';
 import { colors } from '../../constants/colors';
 
