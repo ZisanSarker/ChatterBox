@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Message } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -11,7 +11,7 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       console.log(`API ${config.method?.toUpperCase()} ${config.url}`);
     }
     return config;
@@ -36,7 +36,7 @@ export const fetchMessages = async (): Promise<Message[]> => {
   }
 };
 
-export const sendMessage = async (message: { username: string, text: string }) => {
+export const sendMessage = async (message: { username: string; text: string }) => {
   return apiClient.post('/api/messages', message);
 };
 
